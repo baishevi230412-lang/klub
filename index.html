@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Клуб самомассажа Аиды</title>
+<meta name="description" content="Онлайн-клуб самомассажа лица. 30–40 минут два раза в неделю, два прямых эфира, разбор вашей техники. Первая неделя бесплатно, без карты.">
+<meta name="theme-color" content="#1B1317">
+<meta name="format-detection" content="telephone=no">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ваше лицо не стареет. Оно устаёт">
+<meta property="og:description" content="Онлайн-клуб самомассажа лица. Первая неделя бесплатно, без карты. 30–40 минут два раза в неделю.">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ваше лицо не стареет. Оно устаёт">
+<meta name="twitter:description" content="Онлайн-клуб самомассажа лица. Первая неделя бесплатно, без карты.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%9E%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<style>
+  /* =========================================================
+     ПАЛИТРА
+     Страница намеренно одноцветная по замыслу: тёмные блоки —
+     кабинет вечером, светлые — утренний свет. Тему устройства
+     не переключаем, все цвета заданы явно.
+     ========================================================= */
+  :root {
+    --night:      #1B1317;
+    --night-2:    #251A20;
+    --night-3:    #32232B;
+    --cream:      #F8F2EF;
+    --sand:       #EEE1DB;
+    --ink:        #241A1E;
+    --ink-soft:   #5C4A51;
+    --ink-faint:  #8A757C;
+    --on-night:   #F3E9E6;
+    --on-night-soft: #BCA8AF;
+    --rose:       #B0455E;
+    --rose-lift:  #E4909F;
+    --gold:       #C3A272;
+    --line-dark:  #3B2B32;
+    --line-light: #DFCEC7;
+
+    --f-display: Georgia, "Palatino Linotype", "Book Antiqua", "Times New Roman", serif;
+    --f-body: "Segoe UI", system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+
+    --wrap: 1160px;
+    --read: 60ch;
+
+    /* ЗАМЕНИ НА СВОИ ФОТО:
+       --photo-before: url("foto-do.jpg");
+       --photo-after:  url("foto-posle.jpg");            */
+    --photo-before: linear-gradient(160deg, #3A2C33 0%, #4A3840 55%, #2E2229 100%);
+    --photo-after:  linear-gradient(160deg, #5A4048 0%, #7A5760 55%, #46323A 100%);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--f-body);
+    font-size: 17.5px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .wrap { width: 100%; max-width: var(--wrap); margin-inline: auto; padding-inline: 26px; }
+  .wrap-narrow { max-width: 900px; }
+
+  section { padding-block: clamp(64px, 9vw, 128px); position: relative; }
+
+  /* ---------- зерно: убирает пластиковую гладкость ---------- */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: .5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.42'/%3E%3C/svg%3E");
+  }
+
+  .dark {
+    background: var(--night);
+    color: var(--on-night);
+    position: relative;
+    overflow: hidden;
+  }
+  .dark h1, .dark h2, .dark h3 { color: var(--on-night); }
+  .dark p { color: var(--on-night-soft); }
+  .dark .lede { color: var(--on-night); }
+
+  /* световое пятно, как лампа над кушеткой */
+  .glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    opacity: .5;
+  }
+  .glow--1 { width: 620px; height: 620px; top: -240px; right: -180px; background: #6B3244; }
+  .glow--2 { width: 480px; height: 480px; bottom: -260px; left: -160px; background: #4A2B39; }
+
+  /* ---------- типографика ---------- */
+  h1, h2, h3 {
+    font-family: var(--f-display);
+    font-weight: 400;
+    letter-spacing: -0.022em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  h1 { font-size: clamp(44px, 8.2vw, 92px); line-height: 1.02; }
+  h2 { font-size: clamp(31px, 4.8vw, 54px); line-height: 1.1; }
+  h3 { font-size: clamp(20px, 2.3vw, 25px); line-height: 1.3; letter-spacing: -0.01em; }
+
+  em { font-style: italic; }
+  h1 em, h2 em { color: var(--rose); }
+  .dark h1 em, .dark h2 em { color: var(--rose-lift); }
+
+  p { margin: 0; max-width: var(--read); color: var(--ink-soft); }
+
+  .eyebrow {
+    font-family: var(--f-body);
+    font-size: 11.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::after {
+    content: "";
+    height: 1px;
+    flex: 1 1 auto;
+    max-width: 90px;
+    background: currentColor;
+    opacity: .45;
+  }
+
+  .lede { font-size: clamp(19px, 2.1vw, 23px); line-height: 1.5; color: var(--ink); }
+
+  .stack     { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+  .stack-sm  { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+  .stack-lg  { display: flex; flex-direction: column; gap: clamp(36px, 5vw, 60px); align-items: flex-start; }
+
+  /* ---------- кнопка ---------- */
+  .cta {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--rose);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--f-body);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    padding: 19px 38px;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 12px 30px -12px rgba(176, 69, 94, .75);
+    transition: transform .22s cubic-bezier(.2,.7,.3,1), box-shadow .22s ease;
+  }
+  .cta span { position: relative; z-index: 1; }
+  .cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 20%, rgba(255,255,255,.28) 50%, transparent 80%);
+    transform: translateX(-110%);
+    transition: transform .6s ease;
+  }
+  .cta:hover { transform: translateY(-2px); box-shadow: 0 18px 38px -12px rgba(176, 69, 94, .85); }
+  .cta:hover::after { transform: translateX(110%); }
+  .cta:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+  .cta-arrow { font-size: 20px; line-height: 1; position: relative; z-index: 1; }
+
+  .dark .cta { background: var(--rose-lift); color: #2A141B; box-shadow: 0 14px 34px -14px rgba(228,144,159,.6); }
+
+  .cta-note { font-size: 14.5px; color: var(--ink-faint); margin: 0; }
+  .dark .cta-note { color: var(--on-night-soft); }
+  .cta-row { display: flex; flex-direction: column; gap: 14px; align-items: flex-start; }
+
+  /* ---------- появление при прокрутке ---------- */
+  .rise { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.3,1); }
+  .rise.in { opacity: 1; transform: none; }
+  .rise[data-d="1"] { transition-delay: .09s; }
+  .rise[data-d="2"] { transition-delay: .18s; }
+  .rise[data-d="3"] { transition-delay: .27s; }
+  .rise[data-d="4"] { transition-delay: .36s; }
+
+  /* ================= ГЕРОЙ ================= */
+  .hero { padding-block: clamp(72px, 11vw, 150px) clamp(64px, 9vw, 120px); }
+  .hero-grid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; position: relative; z-index: 1; }
+  @media (min-width: 960px) { .hero-grid { grid-template-columns: 1.15fr .85fr; gap: 72px; } }
+
+  .hero h1 { margin-bottom: 4px; }
+
+  .hero-marks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    font-size: 13.5px;
+    letter-spacing: .04em;
+    color: var(--on-night-soft);
+    padding-top: 8px;
+    border-top: 1px solid var(--line-dark);
+    width: 100%;
+  }
+  .hero-marks b { color: var(--on-night); font-weight: 600; }
+
+  /* ---------- рамка под фото ---------- */
+  .photo {
+    position: relative;
+    border: 1px dashed var(--line-light);
+    background: var(--sand);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+    padding: 30px 24px;
+    min-height: 300px;
+  }
+  .photo strong { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+  .photo span { font-size: 13.5px; max-width: 30ch; line-height: 1.5; color: var(--ink-faint); }
+  .photo--dark { background: var(--night-2); border-color: var(--line-dark); }
+  .photo--dark strong { color: var(--on-night); }
+  .photo--dark span { color: var(--on-night-soft); }
+  .photo--hero { min-height: 460px; box-shadow: 0 40px 80px -40px rgba(0,0,0,.7); }
+  .photo--about { min-height: 440px; }
+
+  /* ================= САМОПРОВЕРКА ================= */
+  .check-list { list-style: none; margin: 0; padding: 0; width: 100%; border-top: 1px solid var(--line-light); }
+  .check-item { border-bottom: 1px solid var(--line-light); }
+  .check-item label {
+    display: flex; gap: 18px; align-items: flex-start;
+    padding: 20px 6px; cursor: pointer;
+    font-size: 17.5px; line-height: 1.5; color: var(--ink);
+    transition: color .18s ease, padding-left .25s cubic-bezier(.2,.7,.3,1);
+  }
+  .check-item label:hover { color: var(--rose); padding-left: 12px; }
+  .check-item input {
+    appearance: none; -webkit-appearance: none;
+    flex: 0 0 auto; width: 24px; height: 24px; margin: 2px 0 0;
+    border: 1.5px solid var(--line-light); border-radius: 50%;
+    background: #fff; cursor: pointer; position: relative;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  .check-item input:checked { background: var(--rose); border-color: var(--rose); transform: scale(1.06); }
+  .check-item input:checked::after {
+    content: ""; position: absolute; inset: 0; margin: auto;
+    width: 6px; height: 11px; border: solid #fff; border-width: 0 2px 2px 0;
+    transform: translateY(-1px) rotate(45deg);
+  }
+  .check-item input:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
+
+  .verdict {
+    width: 100%; margin-top: 32px; padding: 30px 32px;
+    background: #fff; border-radius: 4px;
+    border-left: 3px solid var(--rose);
+    box-shadow: 0 26px 50px -34px rgba(60, 30, 40, .5);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .verdict-count {
+    font-family: var(--f-body); font-size: 12px; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--rose); font-weight: 700;
+    font-variant-numeric: tabular-nums; margin: 0;
+  }
+  .verdict p { font-size: 18px; color: var(--ink); max-width: 56ch; }
+
+  /* ================= ТРИ ЭТАЖА ================= */
+  .floors { width: 100%; display: flex; flex-direction: column; }
+  .floor {
+    display: grid; grid-template-columns: 1fr; gap: 12px;
+    padding: clamp(26px, 3.4vw, 40px) 0;
+    border-top: 1px solid var(--line-light);
+    align-items: start;
+  }
+  .floor:last-child { border-bottom: 1px solid var(--line-light); }
+  @media (min-width: 760px) { .floor { grid-template-columns: 120px 1fr; gap: 40px; } }
+
+  .floor-num {
+    font-family: var(--f-display);
+    font-size: clamp(46px, 6vw, 74px);
+    line-height: .85;
+    color: var(--line-light);
+    font-variant-numeric: lining-nums;
+    transition: color .4s ease;
+  }
+  .floor--key .floor-num { color: var(--rose); }
+  .floor h3 { margin-bottom: 8px; }
+  .floor-tag {
+    display: inline-block; font-size: 11.5px; letter-spacing: .16em;
+    text-transform: uppercase; font-weight: 700; margin-bottom: 10px;
+    color: var(--ink-faint);
+  }
+  .floor--key .floor-tag { color: var(--rose); }
+
+  /* ================= ПОЛЗУНОК ДО/ПОСЛЕ ================= */
+  .ba {
+    position: relative; width: 100%;
+    aspect-ratio: 16 / 10;
+    max-height: 620px;
+    border-radius: 6px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    cursor: ew-resize;
+    box-shadow: 0 50px 90px -50px rgba(0,0,0,.85);
+    --pos: 50%;
+  }
+  @media (max-width: 620px) { .ba { aspect-ratio: 4 / 5; } }
+
+  .ba-layer {
+    position: absolute; inset: 0;
+    background-size: cover;
+    background-position: center;
+    display: flex; align-items: flex-end;
+  }
+  .ba-layer--after  { background-image: var(--photo-after); }
+  .ba-layer--before {
+    background-image: var(--photo-before);
+    clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+  }
+
+  .ba-caption {
+    position: absolute; top: 22px;
+    font-family: var(--f-body); font-size: 11.5px; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: #fff; background: rgba(20,12,16,.55);
+    backdrop-filter: blur(6px);
+    padding: 8px 16px; border-radius: 999px;
+  }
+  .ba-caption--before { left: 22px; }
+  .ba-caption--after  { right: 22px; }
+
+  .ba-hint {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+    font-size: 13px; color: rgba(255,255,255,.82);
+    background: rgba(20,12,16,.5); backdrop-filter: blur(6px);
+    padding: 8px 18px; border-radius: 999px; white-space: nowrap;
+    transition: opacity .4s ease;
+  }
+  .ba.touched .ba-hint { opacity: 0; }
+
+  .ba-handle {
+    position: absolute; top: 0; bottom: 0; left: var(--pos);
+    width: 2px; background: #fff; transform: translateX(-1px);
+    box-shadow: 0 0 22px rgba(0,0,0,.5);
+  }
+  .ba-knob {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #fff; border: 0; cursor: ew-resize;
+    display: flex; align-items: center; justify-content: center;
+    gap: 4px; padding: 0;
+    box-shadow: 0 8px 26px rgba(0,0,0,.42);
+    transition: transform .18s cubic-bezier(.2,.7,.3,1);
+  }
+  .ba-knob:hover { transform: translate(-50%, -50%) scale(1.08); }
+  .ba-knob:focus-visible { outline: 3px solid var(--rose-lift); outline-offset: 4px; }
+  .ba-knob i { display: block; width: 0; height: 0; border-block: 6px solid transparent; }
+  .ba-knob i:first-child { border-right: 8px solid var(--night); }
+  .ba-knob i:last-child  { border-left: 8px solid var(--night); }
+
+  .ba-placeholder-note {
+    position: absolute; inset: auto 0 0 0;
+    padding: 90px 26px 26px;
+    background: linear-gradient(to top, rgba(15,9,12,.9), transparent);
+    font-size: 13px; color: rgba(255,255,255,.7); text-align: center;
+    pointer-events: none;
+  }
+
+  /* ================= КАРТОЧКИ ================= */
+  .cards { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; }
+  @media (min-width: 800px) { .cards { grid-template-columns: repeat(3, 1fr); gap: 24px; } }
+  .card {
+    background: #fff; border-radius: 5px; padding: 34px 30px;
+    display: flex; flex-direction: column; gap: 12px;
+    box-shadow: 0 24px 46px -34px rgba(60, 30, 40, .45);
+    border-top: 3px solid var(--rose);
+    transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease;
+  }
+  .card:hover { transform: translateY(-5px); box-shadow: 0 34px 60px -34px rgba(60, 30, 40, .55); }
+  .card-tag { font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--rose); font-weight: 700; }
+  .card p { font-size: 16.5px; }
+
+  /* ================= ЦЕНА ================= */
+  .price-grid { display: grid; grid-template-columns: 1fr; gap: 40px; width: 100%; }
+  @media (min-width: 900px) { .price-grid { grid-template-columns: 1fr 1fr; gap: 68px; } }
+  .price-num {
+    font-family: var(--f-display);
+    font-size: clamp(56px, 9vw, 96px); line-height: .95;
+    color: var(--on-night); font-variant-numeric: tabular-nums;
+    display: block;
+  }
+  .price-per { font-size: 17px; color: var(--on-night-soft); }
+  .price-strike { color: var(--on-night-soft); font-size: 16px; }
+
+  .plain-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; width: 100%; }
+  .plain-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 16.5px; }
+  .plain-list li::before { content: "✓"; color: var(--rose-lift); flex: 0 0 auto; font-size: 15px; padding-top: 2px; }
+  .plain-list--no li::before { content: "✕"; color: var(--on-night-soft); opacity: .6; }
+
+  /* ================= ВОПРОСЫ ================= */
+  .faq { width: 100%; border-top: 1px solid var(--line-light); }
+  details { border-bottom: 1px solid var(--line-light); }
+  summary {
+    cursor: pointer; padding: 25px 52px 25px 0;
+    font-size: 18.5px; font-weight: 600; color: var(--ink);
+    list-style: none; position: relative;
+    transition: color .18s ease;
+  }
+  summary:hover { color: var(--rose); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: ""; position: absolute; right: 8px; top: 50%;
+    width: 13px; height: 13px;
+    border-right: 1.5px solid var(--rose); border-bottom: 1.5px solid var(--rose);
+    transform: translateY(-70%) rotate(45deg);
+    transition: transform .25s ease;
+  }
+  details[open] summary::after { transform: translateY(-25%) rotate(-135deg); }
+  summary:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
+  details p { padding-bottom: 28px; max-width: 62ch; }
+
+  /* ================= ОТЗЫВЫ ================= */
+  .quotes { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; }
+  @media (min-width: 800px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
+  .quote {
+    border: 1px dashed var(--line-light); background: var(--sand);
+    border-radius: 5px; padding: 30px 26px;
+    display: flex; flex-direction: column; gap: 12px; min-height: 200px;
+  }
+  .quote strong { font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
+  .quote span { font-size: 14px; color: var(--ink-faint); line-height: 1.55; }
+
+  .note {
+    font-size: 14px; color: var(--ink-faint);
+    border-left: 2px solid var(--rose); padding-left: 16px; max-width: 54ch;
+  }
+  .dark .note { color: var(--on-night-soft); border-color: var(--rose-lift); }
+
+  .signature {
+    font-family: var(--f-display); font-style: italic;
+    font-size: clamp(22px, 3vw, 30px); color: var(--rose);
+  }
+  .dark .signature { color: var(--rose-lift); }
+
+  footer { background: var(--night); color: var(--on-night-soft); padding-block: 48px; font-size: 14px; }
+  footer p { color: var(--on-night-soft); max-width: none; margin-bottom: 8px; }
+
+  /* ================= ПЛАНШЕТ ================= */
+  @media (min-width: 640px) and (max-width: 799px) {
+    .cards, .quotes { grid-template-columns: 1fr 1fr; }
+    .cards .card:last-child, .quotes .quote:last-child { grid-column: 1 / -1; }
+  }
+
+  /* ================= ТЕЛЕФОН ================= */
+  @media (max-width: 600px) {
+    body { font-size: 16.5px; line-height: 1.62; }
+
+    .wrap { padding-inline: 20px; }
+    section { padding-block: clamp(52px, 12vw, 76px); }
+
+    h1 { font-size: clamp(36px, 10.5vw, 46px); line-height: 1.06; }
+    h2 { font-size: clamp(27px, 8vw, 34px); }
+    h3 { font-size: 19.5px; }
+    .lede { font-size: 18px; }
+
+    .eyebrow { letter-spacing: .16em; font-size: 11px; }
+    .eyebrow::after { max-width: 44px; }
+
+    .hero { padding-block: 56px 60px; }
+    .photo--hero { min-height: 330px; }
+    .photo--about { min-height: 300px; }
+    .photo { padding: 24px 18px; min-height: 240px; }
+
+    .hero-marks { gap: 8px 18px; font-size: 12.5px; }
+
+    /* кнопка на всю ширину — по ней проще попасть пальцем */
+    .cta { width: 100%; justify-content: center; padding: 18px 24px; font-size: 16.5px; }
+    .cta-row { width: 100%; }
+    .cta-note { font-size: 13.5px; }
+
+    .check-item label { padding: 17px 2px; font-size: 16.5px; gap: 14px; }
+    .check-item label:hover { padding-left: 2px; }
+    .check-item input { width: 26px; height: 26px; }
+    .verdict { padding: 24px 22px; margin-top: 26px; }
+    .verdict p { font-size: 16.5px; }
+
+    .floor { padding: 24px 0; }
+    .floor-num { font-size: 44px; }
+
+    .ba { border-radius: 4px; }
+    .ba-caption { top: 14px; font-size: 10.5px; padding: 7px 13px; letter-spacing: .16em; }
+    .ba-caption--before { left: 14px; }
+    .ba-caption--after { right: 14px; }
+    .ba-hint { bottom: 16px; font-size: 12.5px; padding: 7px 15px; }
+    .ba-knob { width: 60px; height: 60px; }
+    .ba-placeholder-note { padding: 60px 18px 16px; font-size: 11.5px; }
+
+    .card { padding: 26px 22px; }
+    .card:hover { transform: none; }
+
+    .price-num { font-size: 52px; }
+    .plain-list li { font-size: 16px; }
+
+    summary { font-size: 17.5px; padding: 21px 42px 21px 0; }
+    summary::after { right: 4px; width: 11px; height: 11px; }
+    details p { padding-bottom: 22px; }
+
+    .quote { min-height: 0; padding: 26px 22px; }
+
+    .note { font-size: 13.5px; padding-left: 14px; }
+    .signature { font-size: 21px; }
+
+    footer { padding-block: 36px; }
+  }
+
+  /* очень узкие экраны */
+  @media (max-width: 360px) {
+    .wrap { padding-inline: 16px; }
+    h1 { font-size: 33px; }
+    .ba-caption--after { right: 10px; }
+    .ba-caption--before { left: 10px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .rise { opacity: 1; transform: none; }
+    .cta:hover, .card:hover, .ba-knob:hover { transform: none; }
+    .check-item label:hover { padding-left: 6px; }
+  }
+</style>
+
+<!-- ================= ГЕРОЙ ================= -->
+<section class="dark grain hero">
+  <div class="glow glow--1"></div>
+  <div class="glow glow--2"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="stack rise" data-d="0">
+        <p class="eyebrow">Онлайн-клуб самомассажа лица · Казахстан</p>
+        <h1>Ваше лицо не стареет.<br>Оно <em>устаёт</em>.</h1>
+        <p class="lede">Отёк, тяжёлые веки, поплывший к вечеру овал — это редко про годы. Это то, что копится за неделю и уходит за три, если знать, куда положить руки.</p>
+        <div class="cta-row">
+          <a class="cta" href="#ССЫЛКА_НА_ПРОБНУЮ_НЕДЕЛЮ"><span>Забрать неделю бесплатно</span><span class="cta-arrow">→</span></a>
+          <p class="cta-note">Без карты. Без условий. 7 дней внутри клуба — потом решаете сами.</p>
+        </div>
+        <div class="hero-marks">
+          <span><b>5 лет</b> в массаже лица</span>
+          <span><b>2 года</b> практики руками</span>
+          <span><b>30–40 минут</b> два раза в неделю</span>
+        </div>
+      </div>
+
+      <div class="photo photo--dark photo--hero rise" data-d="2">
+        <strong>Фото: Аида</strong>
+        <span>Портрет у кушетки, руки в кадре, свет из окна. Вертикальный кадр — он встанет в эту рамку без обрезки.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= САМОПРОВЕРКА ================= -->
+<section class="grain">
+  <div class="wrap wrap-narrow stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Проверьте себя</p>
+      <h2>Отметьте то, что <em>про вас</em></h2>
+      <p class="lede">Честно, никто не видит. В конце скажу, что это значит.</p>
+    </div>
+
+    <ul class="check-list rise" id="checklist">
+      <li class="check-item"><label><input type="checkbox"><span>Утром смотрю в зеркало три секунды и отворачиваюсь</span></label></li>
+      <li class="check-item"><label><input type="checkbox"><span>К вечеру лицо тяжелеет, а свои фотографии я удаляю</span></label></li>
+      <li class="check-item"><label><input type="checkbox"><span>Пробовала массаж по видео из интернета и бросила — не поняла, правильно ли делаю</span></label></li>
+      <li class="check-item"><label><input type="checkbox"><span>Покупала крем за большие деньги, и он «работал» недели две</span></label></li>
+      <li class="check-item"><label><input type="checkbox"><span>Ловлю себя на сжатых зубах и сведённых бровях</span></label></li>
+      <li class="check-item"><label><input type="checkbox"><span>Думала про уколы — не из желания, а из «наверное, уже поздно»</span></label></li>
+      <li class="check-item"><label><input type="checkbox"><span>На себя времени не остаётся: сначала все остальные, потом я</span></label></li>
+    </ul>
+
+    <div class="verdict" id="verdict" hidden>
+      <p class="verdict-count" id="verdict-count"></p>
+      <p id="verdict-text"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ТРИ ЭТАЖА ================= -->
+<section class="grain" style="background: var(--sand);">
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Почему до сих пор не получалось</p>
+      <h2>Дело не в вас.<br>Вам показали <em>не тот этаж</em></h2>
+      <p class="lede">Женщины годами мажут, тянут и покупают — и это честные попытки. Просто вся индустрия работает с одним слоем лица, а держат его совсем другие два.</p>
+    </div>
+
+    <div class="floors">
+      <div class="floor rise">
+        <div class="floor-num">01</div>
+        <div>
+          <span class="floor-tag">Сюда достаёт крем</span>
+          <h3>Кожа</h3>
+          <p>Крем увлажняет, смягчает, защищает — и делает это хорошо. Именно поэтому первые недели кажется, что помогает.</p>
+        </div>
+      </div>
+      <div class="floor floor--key rise" data-d="1">
+        <div class="floor-num">02</div>
+        <div>
+          <span class="floor-tag">Сюда достают только руки</span>
+          <h3>Мышца и связки</h3>
+          <p>Здесь держится овал. Баночка сюда не добирается физически — ни за 3 000 ₸, ни за 60 000 ₸. На упаковке об этом не пишут, иначе её не купят.</p>
+        </div>
+      </div>
+      <div class="floor floor--key rise" data-d="2">
+        <div class="floor-num">03</div>
+        <div>
+          <span class="floor-tag">Сюда достают только руки</span>
+          <h3>Отток</h3>
+          <p>Здесь живёт отёк — то, что вы принимаете за возраст. Уходит он вниз, через шею. Если шея зажата, дорога перекрыта, и лицо стоит.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="note rise">Весь секрет неприятно дешёвый: до второго и третьего этажа достают только руки. Поэтому о нём и рассказывают неохотно.</p>
+  </div>
+</section>
+
+<!-- ================= ДО И ПОСЛЕ ================= -->
+<section class="dark grain">
+  <div class="glow glow--2" style="top:-180px; left:auto; right:-140px; bottom:auto;"></div>
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Что видно в зеркале</p>
+      <h2>На первом занятии я делаю <em>половину лица</em></h2>
+      <p class="lede">И отправляю женщину к зеркалу. Она видит две разные половины: одна свежее, глаз открыт шире, скула выше. Я при этом молчу — за меня говорит отражение.</p>
+    </div>
+
+    <div class="ba rise" id="ba" data-d="1">
+      <div class="ba-layer ba-layer--after"></div>
+      <div class="ba-layer ba-layer--before"></div>
+      <span class="ba-caption ba-caption--before">До</span>
+      <span class="ba-caption ba-caption--after">После</span>
+      <div class="ba-handle" id="ba-handle">
+        <button class="ba-knob" id="ba-knob" type="button"
+                role="slider" aria-label="Сравнить до и после"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <i></i><i></i>
+        </button>
+      </div>
+      <span class="ba-hint" id="ba-hint">Потяните ползунок ←→</span>
+      <p class="ba-placeholder-note" id="ba-note">Замените заглушки на фото Аиды: в стилях задайте <b>--photo-before</b> и <b>--photo-after</b></p>
+    </div>
+
+    <p class="note rise">Промежуточный результат виден уже после первого занятия. Устойчивое изменение овала — это недели регулярной работы. Я говорю это до того, как вы начнёте, а не после.</p>
+  </div>
+</section>
+
+<!-- ================= ЧТО ВНУТРИ ================= -->
+<section class="grain">
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Что внутри клуба</p>
+      <h2>Без красивых слов</h2>
+    </div>
+
+    <div class="cards">
+      <div class="card rise">
+        <span class="card-tag">Уроки</span>
+        <h3>По шагам, когда удобно</h3>
+        <p>Разобрано по зонам: шея, челюсть, скулы, глаза, лоб. Смотрите в своём темпе и возвращайтесь сколько нужно.</p>
+      </div>
+      <div class="card rise" data-d="1">
+        <span class="card-tag">Два эфира в неделю</span>
+        <h3>Я смотрю и поправляю руку</h3>
+        <p>То, чего нет ни в одном записанном видео. Камеру включать не обязательно — многие не включают.</p>
+      </div>
+      <div class="card rise" data-d="2">
+        <span class="card-tag">Чат</span>
+        <h3>Спросить можно в любой день</h3>
+        <p>Тот самый вопрос в 22:40 в четверг: «а так правильно?». Без ответа на него женщины и бросают.</p>
+      </div>
+    </div>
+
+    <div class="stack-sm rise">
+      <h3>Сколько это занимает</h3>
+      <p class="lede">30–40 минут два раза в неделю. Не каждый день и не по часу — мышце нужно восстанавливаться, как после зала.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= КТО ВЕДЁТ ================= -->
+<section class="grain" style="background: var(--sand);">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="stack rise">
+        <p class="eyebrow">Кто ведёт</p>
+        <h2>Аида</h2>
+        <p class="lede">5 лет я изучаю массаж лица. 2 года из них — руками, вживую, каждую неделю, в Костанае.</p>
+        <p>Началось это не с бизнеса. Пять лет назад я просто хотела разобраться со своим лицом в зеркале утром: читала, училась, пробовала на себе. Через несколько лет ко мне начали приходить женщины и просить то же самое.</p>
+        <p>Массаж тела я не делаю — там другая анатомия и сотни техник, я в них не разбираюсь. Я выбрала лицо и копаю только его. Узко — значит глубоко.</p>
+        <p>Кушетка одна, а женщин, которым это нужно, тысячи: из Актобе, Уральска, Шымкента ко мне на сорок минут не доедешь. Поэтому клуб.</p>
+        <p class="signature">До встречи на моей кушетке</p>
+      </div>
+
+      <div class="photo photo--about rise" data-d="2">
+        <strong>Фото: Аида за работой</strong>
+        <span>Руки на лице клиентки, кушетка, тёплый свет. Лицо клиентки можно не показывать — важны руки.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ЦЕНА ================= -->
+<section class="dark grain">
+  <div class="glow glow--1" style="top:auto; bottom:-260px; right:auto; left:-180px;"></div>
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Сколько стоит</p>
+      <h2>17 000 ₸ в месяц.<br>И первая неделя <em>бесплатно</em></h2>
+    </div>
+
+    <div class="price-grid">
+      <div class="stack rise">
+        <div>
+          <span class="price-num">17 000 ₸</span>
+          <span class="price-per">в месяц · отмена в любой момент</span>
+        </div>
+        <p>Это меньше, чем два визита к косметологу. Только визит заканчивается через час, а клуб работает все 30 дней.</p>
+        <p>А теперь сделайте одну неприятную вещь: сложите, сколько вы потратили на лицо за последний год. Крем, сыворотка, патчи, пара разовых процедур. По отдельности мелочь — вместе сумма, о которой мы стараемся не думать.</p>
+        <p>Я не призываю выбрасывать косметику. Просто посчитайте один раз и сравните.</p>
+      </div>
+
+      <div class="stack rise" data-d="1">
+        <div class="stack-sm">
+          <h3>Что входит</h3>
+          <ul class="plain-list">
+            <li>Уроки по шагам, разобранные по зонам лица</li>
+            <li>Два прямых эфира в неделю — я смотрю, как вы делаете, и поправляю</li>
+            <li>Чат, где можно спросить в любой день</li>
+            <li>Первая неделя бесплатно, без привязки карты</li>
+          </ul>
+        </div>
+
+        <div class="stack-sm">
+          <h3>Чего здесь нет</h3>
+          <ul class="plain-list plain-list--no">
+            <li>Обещания «минус 10 лет»</li>
+            <li>Гарантий результата к конкретной дате</li>
+            <li>Варианта, где я всё делаю за вас — руками работаете вы</li>
+            <li>Продажи косметики: я не продаю ничего, кроме клуба</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-row rise">
+      <a class="cta" href="#ССЫЛКА_НА_ПРОБНУЮ_НЕДЕЛЮ"><span>Начать с бесплатной недели</span><span class="cta-arrow">→</span></a>
+      <p class="cta-note">Семь дней внутри. Не понравится — просто уйдёте, отменять нечего.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ВОЗРАЖЕНИЯ ================= -->
+<section class="grain">
+  <div class="wrap wrap-narrow stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Вы наверняка спросите</p>
+      <h2>Честные ответы</h2>
+    </div>
+
+    <div class="faq rise">
+      <details>
+        <summary>У меня правда нет времени</summary>
+        <p>30–40 минут два раза в неделю — это час в неделю. Загляните в экранное время своего телефона: там обычно от трёх до пяти часов в сутки. Вопрос не в наличии времени, а в том, кому мы его отдаём по умолчанию. А если сегодня нет сил на сорок минут — есть вариант на четыре, я его тоже показываю.</p>
+      </details>
+      <details>
+        <summary>Я уже пробовала сама и бросила</summary>
+        <p>Так почти у всех, и причина одна: «я не понимаю, правильно ли делаю». Себя в зеркале оценить невозможно — это физика, а не слабый характер. Ровно поэтому в клубе два живых эфира в неделю, а не просто записанные уроки.</p>
+      </details>
+      <details>
+        <summary>Боюсь растянуть кожу и сделать хуже</summary>
+        <p>Растягивает не массаж, а неправильный массаж: по сухой коже, с силой, в случайном направлении. Первый же урок — про нажим и скольжение, потому что без них можно не начинать. Проверка простая: если кожа под пальцем собирается в складку, вы делаете именно то, чего боитесь.</p>
+      </details>
+      <details>
+        <summary>А если я пропущу неделю?</summary>
+        <p>Ничего не случится. Уроки остаются, эфиры записываются, вы возвращаетесь в свой день и продолжаете. Здесь нет расписания, от которого можно отстать, и я не пишу «вы отстали от группы».</p>
+      </details>
+      <details>
+        <summary>Мне 50+. Не поздно?</summary>
+        <p>За два года практики я не встретила лица, с которым нельзя работать. После пятидесяти работаем мягче и дольше — кожа тоньше, восстановление медленнее. Результат приходит, просто иначе: сначала свежесть, потом овал.</p>
+      </details>
+      <details>
+        <summary>Нужно ли привязывать карту для пробной недели?</summary>
+        <p>Нет. Ни карты, ни автосписания, ни «отмените до окончания срока». Семь дней вы просто внутри, а решение принимаете после — по своему лицу в зеркале, а не по моим словам.</p>
+      </details>
+      <details>
+        <summary>Я делаю уколы. Мне сюда можно?</summary>
+        <p>Можно. Я не спорю с вашим выбором и не берусь его комментировать — это ваше лицо. Массаж работает с другим: с тонусом, оттоком и зажимами. Единственное правило — после процедур ждём разрешения того, кто их делал.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ОТЗЫВЫ ================= -->
+<section class="grain" style="background: var(--sand);">
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Что говорят женщины</p>
+      <h2>Своими словами</h2>
+    </div>
+
+    <div class="quotes">
+      <div class="quote rise">
+        <strong>Место под отзыв 1</strong>
+        <span>Возьмите настоящее сообщение из директа или чата — со скриншотом или текстом, как написано, вместе с опечатками. Отредактированный отзыв читается как выдуманный.</span>
+      </div>
+      <div class="quote rise" data-d="1">
+        <strong>Место под отзыв 2</strong>
+        <span>Лучше всего работают конкретные фразы: «утром лицо просыпается быстрее», «муж спросил, выспалась ли я». Не «всё супер, рекомендую».</span>
+      </div>
+      <div class="quote rise" data-d="2">
+        <strong>Место под отзыв 3</strong>
+        <span>Имя и возраст — с разрешения женщины. Если разрешения нет, честнее написать «женщина, 47 лет», чем придумать имя.</span>
+      </div>
+    </div>
+
+    <p class="note rise">Отзывы намеренно оставлены пустыми. Выдуманные тексты здесь стоят дороже, чем их отсутствие: рынок маленький, и одна пойманная неправда обходится дороже сотни честных постов.</p>
+  </div>
+</section>
+
+<!-- ================= ФИНАЛ ================= -->
+<section class="dark grain">
+  <div class="glow glow--1" style="top:-280px; right:50%; transform: translateX(50%);"></div>
+  <div class="wrap wrap-narrow stack rise" style="align-items: center; text-align: center;">
+    <p class="eyebrow" style="justify-content:center;">Вход</p>
+    <h2>Неделя внутри — <em>бесплатно</em></h2>
+    <p class="lede" style="max-width: 54ch;">Уроки, прямой эфир, чат. Семь дней вы делаете и смотрите на своё лицо, а потом решаете сами. Я не умею продавать вслепую — пусть за меня решит ваше зеркало.</p>
+    <div class="cta-row" style="align-items: center;">
+      <a class="cta" href="#ССЫЛКА_НА_ПРОБНУЮ_НЕДЕЛЮ"><span>Забрать неделю бесплатно</span><span class="cta-arrow">→</span></a>
+      <p class="cta-note">Без карты · Без условий · Дальше 17 000 ₸ в месяц, если останетесь</p>
+    </div>
+    <p class="signature" style="margin-top: 14px;">До встречи на моей кушетке</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Аида · онлайн-клуб самомассажа лица · Костанай — весь Казахстан</p>
+    <p>Массаж лица не лечит заболевания и не заменяет врача. При воспалении, повышенной температуре и сосудистых проблемах сначала к специалисту.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- появление при прокрутке ---------- */
+  var risers = document.querySelectorAll('.rise');
+  if (reduce || !('IntersectionObserver' in window)) {
+    for (var i = 0; i < risers.length; i++) risers[i].classList.add('in');
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    for (var j = 0; j < risers.length; j++) io.observe(risers[j]);
+  }
+
+  /* ---------- самопроверка ---------- */
+  var list = document.getElementById('checklist');
+  var box = document.getElementById('verdict');
+  var countEl = document.getElementById('verdict-count');
+  var textEl = document.getElementById('verdict-text');
+
+  if (list && box) {
+    var word = function (n) {
+      var d = n % 10, h = n % 100;
+      if (d === 1 && h !== 11) return 'пункт';
+      if (d >= 2 && d <= 4 && (h < 12 || h > 14)) return 'пункта';
+      return 'пунктов';
+    };
+    var verdict = function (n) {
+      if (n <= 2) return 'Вы в хорошей форме — и это как раз тот момент, когда работать проще всего. Сохранять всегда дешевле, чем возвращать. Начните с бесплатной недели, пока вопрос не стал срочным.';
+      if (n <= 4) return 'Обычная картина для женщины, которая много работает и мало спит. Почти всё отмеченное — про отёк, зажимы и усталость, а не про возраст. Это та часть, которая уходит быстрее всего: недели, а не годы.';
+      return 'Вы отметили почти всё — и я вижу такие ответы каждую неделю. Хорошая новость в том, что это не список ваших недостатков. Это список того, с чем работают руками, и каждый пункт разбирается по отдельности.';
+    };
+    list.addEventListener('change', function () {
+      var boxes = list.querySelectorAll('input[type="checkbox"]');
+      var n = 0;
+      for (var k = 0; k < boxes.length; k++) if (boxes[k].checked) n++;
+      if (n === 0) { box.hidden = true; return; }
+      box.hidden = false;
+      countEl.textContent = 'Отмечено ' + n + ' ' + word(n) + ' из 7';
+      textEl.textContent = verdict(n);
+    });
+  }
+
+  /* ---------- ползунок до/после ---------- */
+  var ba = document.getElementById('ba');
+  var knob = document.getElementById('ba-knob');
+  if (ba && knob) {
+    var pos = 50;
+    var dragging = false;
+
+    var apply = function () {
+      ba.style.setProperty('--pos', pos + '%');
+      knob.setAttribute('aria-valuenow', Math.round(pos));
+    };
+
+    var fromEvent = function (clientX) {
+      var r = ba.getBoundingClientRect();
+      var p = ((clientX - r.left) / r.width) * 100;
+      pos = Math.max(0, Math.min(100, p));
+      apply();
+      ba.classList.add('touched');
+    };
+
+    ba.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      ba.setPointerCapture(e.pointerId);
+      fromEvent(e.clientX);
+    });
+    ba.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      e.preventDefault();
+      fromEvent(e.clientX);
+    });
+    var stop = function (e) {
+      if (!dragging) return;
+      dragging = false;
+      try { ba.releasePointerCapture(e.pointerId); } catch (err) {}
+    };
+    ba.addEventListener('pointerup', stop);
+    ba.addEventListener('pointercancel', stop);
+
+    knob.addEventListener('keydown', function (e) {
+      var step = e.shiftKey ? 10 : 3;
+      if (e.key === 'ArrowLeft')  { pos = Math.max(0, pos - step); apply(); ba.classList.add('touched'); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { pos = Math.min(100, pos + step); apply(); ba.classList.add('touched'); e.preventDefault(); }
+      if (e.key === 'Home')       { pos = 0; apply(); e.preventDefault(); }
+      if (e.key === 'End')        { pos = 100; apply(); e.preventDefault(); }
+    });
+    knob.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    apply();
+  }
+})();
+</script>
+</body>
+</html>
