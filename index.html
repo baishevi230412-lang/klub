@@ -225,6 +225,9 @@
 
   /* живое фото вместо рамки-заглушки */
   .shot {
+    /* у figure свой отступ в стилях браузера (1em 40px) — гасим,
+       иначе снимок выезжает за колонку вправо */
+    margin: 0;
     position: relative; width: 100%; aspect-ratio: 4 / 5;
     border-radius: 5px; overflow: hidden; background: var(--night-2);
   }
