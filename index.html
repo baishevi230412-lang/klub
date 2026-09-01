@@ -223,28 +223,22 @@
   }
   .hero-marks b { color: var(--on-night); font-weight: 600; }
 
-  /* ---------- рамка под фото ---------- */
-  .photo {
-    position: relative;
-    border: 1px dashed var(--line-light);
-    background: var(--sand);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    text-align: center;
-    padding: 30px 24px;
-    min-height: 300px;
+  /* живое фото вместо рамки-заглушки */
+  .shot {
+    position: relative; width: 100%; aspect-ratio: 4 / 5;
+    border-radius: 5px; overflow: hidden; background: var(--night-2);
   }
-  .photo strong { font-size: 12px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
-  .photo span { font-size: 13.5px; max-width: 30ch; line-height: 1.5; color: var(--ink-faint); }
-  .photo--dark { background: var(--night-2); border-color: var(--line-dark); }
-  .photo--dark strong { color: var(--on-night); }
-  .photo--dark span { color: var(--on-night-soft); }
-  .photo--hero { min-height: 460px; box-shadow: 0 40px 80px -40px rgba(0,0,0,.7); }
-  .photo--about { min-height: 440px; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .shot--hero { box-shadow: 0 40px 80px -40px rgba(0,0,0,.7); }
+  .shot--hero::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, transparent 55%, rgba(20,12,16,.45) 100%);
+  }
+  .shot-cap {
+    position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+    padding: 16px 18px; font-size: 13px; line-height: 1.45; color: #fff;
+    background: linear-gradient(180deg, transparent, rgba(20,12,16,.72));
+  }
 
   /* ================= САМОПРОВЕРКА ================= */
   .check-list { list-style: none; margin: 0; padding: 0; width: 100%; border-top: 1px solid var(--line-light); }
@@ -445,17 +439,6 @@
   summary:focus-visible { outline: 3px solid var(--rose); outline-offset: 3px; }
   details p { padding-bottom: 28px; max-width: 62ch; }
 
-  /* ================= ОТЗЫВЫ ================= */
-  .quotes { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; }
-  @media (min-width: 800px) { .quotes { grid-template-columns: repeat(3, 1fr); } }
-  .quote {
-    border: 1px dashed var(--line-light); background: var(--sand);
-    border-radius: 5px; padding: 30px 26px;
-    display: flex; flex-direction: column; gap: 12px; min-height: 200px;
-  }
-  .quote strong { font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); }
-  .quote span { font-size: 14px; color: var(--ink-faint); line-height: 1.55; }
-
   .note {
     font-size: 14px; color: var(--ink-faint);
     border-left: 2px solid var(--rose); padding-left: 16px; max-width: 54ch;
@@ -501,8 +484,8 @@
 
   /* ================= ПЛАНШЕТ ================= */
   @media (min-width: 640px) and (max-width: 799px) {
-    .cards, .quotes { grid-template-columns: 1fr 1fr; }
-    .cards .card:last-child, .quotes .quote:last-child { grid-column: 1 / -1; }
+    .cards { grid-template-columns: 1fr 1fr; }
+    .cards .card:last-child { grid-column: 1 / -1; }
   }
 
   /* ================= ТЕЛЕФОН ================= */
@@ -521,9 +504,6 @@
     .eyebrow::after { max-width: 44px; }
 
     .hero { padding-block: 56px 60px; }
-    .photo--hero { min-height: 330px; }
-    .photo--about { min-height: 300px; }
-    .photo { padding: 24px 18px; min-height: 240px; }
 
     .hero-marks { gap: 8px 18px; font-size: 12.5px; }
 
@@ -558,8 +538,6 @@
     summary { font-size: 17.5px; padding: 21px 42px 21px 0; }
     summary::after { right: 4px; width: 11px; height: 11px; }
     details p { padding-bottom: 22px; }
-
-    .quote { min-height: 0; padding: 26px 22px; }
 
     .note { font-size: 13.5px; padding-left: 14px; }
     .signature { font-size: 21px; }
@@ -605,10 +583,9 @@
         </div>
       </div>
 
-      <div class="photo photo--dark photo--hero rise" data-d="2">
-        <strong>Фото: Аида</strong>
-        <span>Портрет у кушетки, руки в кадре, свет из окна. Вертикальный кадр — он встанет в эту рамку без обрезки.</span>
-      </div>
+      <figure class="shot shot--hero rise" data-d="2">
+        <img src="aida-portret.jpg" alt="Аида — автор клуба самомассажа лица" width="880" height="1100" fetchpriority="high" decoding="async">
+      </figure>
     </div>
   </div>
 </section>
@@ -796,10 +773,10 @@
         <p class="signature">До встречи на моей кушетке</p>
       </div>
 
-      <div class="photo photo--about rise" data-d="2">
-        <strong>Фото: Аида за работой</strong>
-        <span>Руки на лице клиентки, кушетка, тёплый свет. Лицо клиентки можно не показывать — важны руки.</span>
-      </div>
+      <figure class="shot rise" data-d="2">
+        <img src="aida-ruki.jpg" alt="Руки Аиды на лице клиентки во время массажа" width="880" height="1100" loading="lazy" decoding="async">
+        <figcaption class="shot-cap">Те же движения, что вы будете делать себе сами — только моими руками.</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -892,33 +869,6 @@
         <p>Можно. Я не спорю с вашим выбором и не берусь его комментировать — это ваше лицо. Массаж работает с другим: с тонусом, оттоком и зажимами. Единственное правило — после процедур ждём разрешения того, кто их делал.</p>
       </details>
     </div>
-  </div>
-</section>
-
-<!-- ================= ОТЗЫВЫ ================= -->
-<section class="grain" style="background: var(--sand);">
-  <div class="wrap stack-lg">
-    <div class="stack rise">
-      <p class="eyebrow">Что говорят женщины</p>
-      <h2>Своими словами</h2>
-    </div>
-
-    <div class="quotes">
-      <div class="quote rise">
-        <strong>Место под отзыв 1</strong>
-        <span>Возьмите настоящее сообщение из директа или чата — со скриншотом или текстом, как написано, вместе с опечатками. Отредактированный отзыв читается как выдуманный.</span>
-      </div>
-      <div class="quote rise" data-d="1">
-        <strong>Место под отзыв 2</strong>
-        <span>Лучше всего работают конкретные фразы: «утром лицо просыпается быстрее», «муж спросил, выспалась ли я». Не «всё супер, рекомендую».</span>
-      </div>
-      <div class="quote rise" data-d="2">
-        <strong>Место под отзыв 3</strong>
-        <span>Имя и возраст — с разрешения женщины. Если разрешения нет, честнее написать «женщина, 47 лет», чем придумать имя.</span>
-      </div>
-    </div>
-
-    <p class="note rise">Отзывы намеренно оставлены пустыми. Выдуманные тексты здесь стоят дороже, чем их отсутствие: рынок маленький, и одна пойманная неправда обходится дороже сотни честных постов.</p>
   </div>
 </section>
 
