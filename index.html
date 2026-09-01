@@ -468,8 +468,36 @@
   }
   .dark .signature { color: var(--rose-lift); }
 
-  footer { background: var(--night); color: var(--on-night-soft); padding-block: 48px; font-size: 14px; }
+  footer { background: var(--night); color: var(--on-night-soft); padding-block: 48px calc(48px + env(safe-area-inset-bottom)); font-size: 14px; }
   footer p { color: var(--on-night-soft); max-width: none; margin-bottom: 8px; }
+
+  /* ---------- факты под ползунком ---------- */
+  .facts { display: grid; grid-template-columns: 1fr; gap: 1px; width: 100%; background: var(--line-dark); border: 1px solid var(--line-dark); border-radius: 4px; overflow: hidden; }
+  @media (min-width: 760px) { .facts { grid-template-columns: repeat(3, 1fr); } }
+  .fact { background: var(--night-2); padding: 26px 24px; display: flex; flex-direction: column; gap: 10px; }
+  .fact-num { font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .fact p { font-size: 15.5px; color: var(--on-night-soft); margin: 0; }
+
+  /* ---------- липкая кнопка ---------- */
+  .sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: rgba(27, 19, 23, .92);
+    backdrop-filter: blur(14px);
+    border-top: 1px solid var(--line-dark);
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+    transform: translateY(110%);
+    transition: transform .35s cubic-bezier(.2,.7,.3,1);
+  }
+  .sticky.show { transform: none; }
+  .sticky-text { font-size: 14.5px; color: var(--on-night-soft); margin: 0; max-width: 34ch; }
+  .sticky-text b { color: var(--on-night); font-weight: 600; }
+  .sticky .cta { padding: 14px 28px; font-size: 15.5px; box-shadow: none; flex: 0 0 auto; }
+  @media (max-width: 700px) {
+    .sticky-text { display: none; }
+    .sticky { padding-inline: 16px; }
+    .sticky .cta { width: 100%; justify-content: center; }
+  }
 
   /* ================= ПЛАНШЕТ ================= */
   @media (min-width: 640px) and (max-width: 799px) {
@@ -585,6 +613,57 @@
   </div>
 </section>
 
+<!-- ================= ДО И ПОСЛЕ — ДОКАЗАТЕЛЬСТВО ================= -->
+<section class="dark grain" id="dokazatelstvo">
+  <div class="glow glow--2" style="top:-220px; left:auto; right:-160px; bottom:auto;"></div>
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Это моё лицо</p>
+      <h2>Я начинала <em>с себя</em></h2>
+      <p class="lede">Не с клиенток. Пять лет назад я просто хотела разобраться со своим лицом в зеркале утром — и разобралась. Потяните ползунок.</p>
+    </div>
+
+    <div class="ba rise" id="ba" data-d="1">
+      <div class="ba-layer ba-layer--after"></div>
+      <div class="ba-layer ba-layer--before"></div>
+      <span class="ba-caption ba-caption--before">До</span>
+      <span class="ba-caption ba-caption--after">После</span>
+      <div class="ba-handle" id="ba-handle">
+        <button class="ba-knob" id="ba-knob" type="button"
+                role="slider" aria-label="Сравнить до и после"
+                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <i></i><i></i>
+        </button>
+      </div>
+      <span class="ba-hint" id="ba-hint">Потяните ползунок ←→</span>
+      <p class="ba-placeholder-note" id="ba-note">Замените заглушки на фото Аиды: в стилях задайте <b>--photo-before</b> и <b>--photo-after</b></p>
+    </div>
+
+    <!-- ЗАПОЛНИТЬ ПО ФАКТУ: срок, режим и что именно изменилось. Без выдуманных цифр. -->
+    <div class="facts rise">
+      <div class="fact">
+        <span class="fact-num">СРОК</span>
+        <p>Сколько прошло между снимками. Например: «7 месяцев». Ставьте настоящую цифру — её проверят.</p>
+      </div>
+      <div class="fact">
+        <span class="fact-num">РЕЖИМ</span>
+        <p>30–40 минут два раза в неделю. Ровно то, что делают женщины в клубе.</p>
+      </div>
+      <div class="fact">
+        <span class="fact-num">ЧТО ИЗМЕНИЛОСЬ</span>
+        <p>Двумя-тремя словами и честно: линия челюсти, отёк, взгляд. Не «минус 10 лет».</p>
+      </div>
+    </div>
+
+    <div class="cta-row rise">
+      <a class="cta" href="#ССЫЛКА_НА_ПРОБНУЮ_НЕДЕЛЮ"><span>Хочу так же — неделя бесплатно</span><span class="cta-arrow">→</span></a>
+      <p class="cta-note">Без карты. Покажу с первого дня, с чего начинать именно вам.</p>
+    </div>
+
+    <p class="note rise">Оба снимка без обработки и без фильтров: один свет, один ракурс, одно время суток. Иначе сравнивать бессмысленно — половину «результата» в чужой рекламе даёт свет и поворот головы.</p>
+  </div>
+</section>
+
 <!-- ================= САМОПРОВЕРКА ================= -->
 <section class="grain">
   <div class="wrap wrap-narrow stack-lg">
@@ -651,7 +730,7 @@
   </div>
 </section>
 
-<!-- ================= ДО И ПОСЛЕ ================= -->
+<!-- ================= ПОЛОВИНА ЛИЦА ================= -->
 <section class="dark grain">
   <div class="glow glow--2" style="top:-180px; left:auto; right:-140px; bottom:auto;"></div>
   <div class="wrap stack-lg">
@@ -659,22 +738,12 @@
       <p class="eyebrow">Что видно в зеркале</p>
       <h2>На первом занятии я делаю <em>половину лица</em></h2>
       <p class="lede">И отправляю женщину к зеркалу. Она видит две разные половины: одна свежее, глаз открыт шире, скула выше. Я при этом молчу — за меня говорит отражение.</p>
+      <p>Дома работает так же. Сделайте всё только на одной стороне и подойдите к зеркалу. Это единственное доказательство, которое работает: словам мастера не верят, своему отражению верят сразу.</p>
     </div>
 
-    <div class="ba rise" id="ba" data-d="1">
-      <div class="ba-layer ba-layer--after"></div>
-      <div class="ba-layer ba-layer--before"></div>
-      <span class="ba-caption ba-caption--before">До</span>
-      <span class="ba-caption ba-caption--after">После</span>
-      <div class="ba-handle" id="ba-handle">
-        <button class="ba-knob" id="ba-knob" type="button"
-                role="slider" aria-label="Сравнить до и после"
-                aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-          <i></i><i></i>
-        </button>
-      </div>
-      <span class="ba-hint" id="ba-hint">Потяните ползунок ←→</span>
-      <p class="ba-placeholder-note" id="ba-note">Замените заглушки на фото Аиды: в стилях задайте <b>--photo-before</b> и <b>--photo-after</b></p>
+    <div class="cta-row rise">
+      <a class="cta" href="#ССЫЛКА_НА_ПРОБНУЮ_НЕДЕЛЮ"><span>Попробовать бесплатно</span><span class="cta-arrow">→</span></a>
+      <p class="cta-note">Первая неделя в клубе — без карты и без условий.</p>
     </div>
 
     <p class="note rise">Промежуточный результат виден уже после первого занятия. Устойчивое изменение овала — это недели регулярной работы. Я говорю это до того, как вы начнёте, а не после.</p>
@@ -869,6 +938,12 @@
   </div>
 </section>
 
+<!-- ================= ЛИПКАЯ КНОПКА ================= -->
+<div class="sticky" id="sticky">
+  <p class="sticky-text"><b>Первая неделя бесплатно.</b> Без карты и без условий.</p>
+  <a class="cta" href="#ССЫЛКА_НА_ПРОБНУЮ_НЕДЕЛЮ"><span>Забрать неделю</span><span class="cta-arrow">→</span></a>
+</div>
+
 <footer>
   <div class="wrap">
     <p>Аида · онлайн-клуб самомассажа лица · Костанай — весь Казахстан</p>
@@ -920,6 +995,23 @@
       countEl.textContent = 'Отмечено ' + n + ' ' + word(n) + ' из 7';
       textEl.textContent = verdict(n);
     });
+  }
+
+  /* ---------- липкая кнопка: показываем после первого экрана,
+       прячем, когда виден финальный блок с той же кнопкой ---------- */
+  var sticky = document.getElementById('sticky');
+  var hero = document.querySelector('.hero');
+  if (sticky && hero) {
+    var apply = function () {
+      var past = window.scrollY > hero.offsetHeight * 0.85;      // ушли с первого экрана
+      var docH = document.documentElement.scrollHeight;
+      var nearEnd = window.scrollY + window.innerHeight > docH - 700;  // финальный блок уже виден
+      if (past && !nearEnd) sticky.classList.add('show');
+      else sticky.classList.remove('show');
+    };
+    window.addEventListener('scroll', apply, { passive: true });
+    window.addEventListener('resize', apply, { passive: true });
+    apply();
   }
 
   /* ---------- ползунок до/после ---------- */
