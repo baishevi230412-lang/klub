@@ -51,8 +51,8 @@
     --read: 60ch;
 
     /* Фото Аиды для ползунка «до и после» */
-    --photo-before: url("foto-do.jpg");
-    --photo-after:  url("foto-posle.jpg");
+    --photo-before: url("ba-do.jpg");
+    --photo-after:  url("ba-posle.jpg");
   }
 
   * { box-sizing: border-box; }
@@ -334,7 +334,7 @@
   .ba-layer {
     position: absolute; inset: 0;
     background-size: cover;
-    background-position: center 22%;   /* держим лицо в кадре, а не макушку */
+    background-position: center;       /* кадры уже выровнены по лицу */
     display: flex; align-items: flex-end;
   }
   .ba-layer--after  { background-image: var(--photo-after); }
