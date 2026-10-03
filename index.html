@@ -415,6 +415,39 @@
   .price-per { font-size: 17px; color: var(--on-night-soft); }
   .price-strike { color: var(--on-night-soft); font-size: 16px; }
 
+  /* тарифы */
+  .tariffs { display: grid; grid-template-columns: 1fr; gap: 14px; width: 100%; }
+  @media (min-width: 720px) { .tariffs { grid-template-columns: 1fr 1fr; } }
+  @media (min-width: 1040px) { .tariffs { grid-template-columns: repeat(4, 1fr); gap: 16px; } }
+  .tariff {
+    border: 1px solid var(--line-dark); border-radius: 6px; padding: 26px 24px;
+    display: flex; flex-direction: column; gap: 8px; background: var(--night-2);
+    position: relative;
+  }
+  .tariff--best { border-color: var(--rose-lift); background: var(--night-3); }
+  .tariff-term { font-size: 11.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+  .tariff-sum { font-family: var(--f-display); font-size: clamp(30px, 4vw, 38px); line-height: 1.05; color: var(--on-night); font-variant-numeric: tabular-nums; }
+  .tariff-month { font-size: 15px; color: var(--on-night-soft); }
+  .tariff-save { font-size: 14px; color: var(--rose-lift); margin-top: 2px; }
+  .tariff-badge {
+    position: absolute; top: -10px; right: 16px;
+    background: var(--rose-lift); color: #2A141B;
+    font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: 999px;
+  }
+
+  /* отзывы */
+  .quotes { display: grid; grid-template-columns: 1fr; gap: 18px; width: 100%; }
+  @media (min-width: 760px) { .quotes { grid-template-columns: 1fr 1fr; } }
+  .quote {
+    background: #fff; border: 1px solid var(--line-light); border-radius: 6px;
+    padding: 28px 26px; display: flex; flex-direction: column; gap: 14px;
+    break-inside: avoid;
+  }
+  .quote p { font-size: 16.5px; color: var(--ink); max-width: none; }
+  .quote-who { font-size: 13.5px; color: var(--ink-faint); margin-top: auto; }
+  .quote-who b { color: var(--ink-soft); font-weight: 600; }
+
   .plain-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; width: 100%; }
   .plain-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 16.5px; }
   .plain-list li::before { content: "✓"; color: var(--rose-lift); flex: 0 0 auto; font-size: 15px; padding-top: 2px; }
@@ -802,16 +835,42 @@
   <div class="wrap stack-lg">
     <div class="stack rise">
       <p class="eyebrow">Сколько стоит</p>
-      <h2>17 800 ₸ в месяц.<br>И первая неделя <em>бесплатно</em></h2>
+      <h2>От 9 250 ₸ в месяц.<br>И первая неделя <em>бесплатно</em></h2>
+      <p class="lede">Чем длиннее срок, тем дешевле месяц. Платить можно за месяц, а можно сразу за год — внутри всё одно и то же.</p>
     </div>
+
+    <div class="tariffs rise">
+      <div class="tariff">
+        <span class="tariff-term">1 месяц</span>
+        <span class="tariff-sum">17 800 ₸</span>
+        <span class="tariff-month">17 800 ₸ за месяц</span>
+      </div>
+      <div class="tariff">
+        <span class="tariff-term">3 месяца</span>
+        <span class="tariff-sum">45 500 ₸</span>
+        <span class="tariff-month">15 170 ₸ за месяц</span>
+        <span class="tariff-save">Выгода 7 900 ₸</span>
+      </div>
+      <div class="tariff">
+        <span class="tariff-term">6 месяцев</span>
+        <span class="tariff-sum">79 600 ₸</span>
+        <span class="tariff-month">13 270 ₸ за месяц</span>
+        <span class="tariff-save">Выгода 27 200 ₸</span>
+      </div>
+      <div class="tariff tariff--best">
+        <span class="tariff-badge">выгоднее всего</span>
+        <span class="tariff-term">1 год</span>
+        <span class="tariff-sum">111 000 ₸</span>
+        <span class="tariff-month">9 250 ₸ за месяц</span>
+        <span class="tariff-save">Выгода 102 600 ₸</span>
+      </div>
+    </div>
+
+    <p class="note rise">Месяц подписки — это календарный месяц, с 1-го по 30-е или 31-е число. Занятия два раза в неделю, ориентир — среда и суббота, 8–9 занятий в месяц. Цены указаны за участие в клубе без индивидуального сопровождения.</p>
 
     <div class="price-grid">
       <div class="stack rise">
-        <div>
-          <span class="price-num">17 800 ₸</span>
-          <span class="price-per">в месяц · отмена в любой момент</span>
-        </div>
-        <p>Это меньше, чем два визита к косметологу. Только визит заканчивается через час, а клуб работает все 30 дней.</p>
+        <p>Месяц в клубе — это меньше, чем два визита к косметологу. Только визит заканчивается через час, а клуб работает весь месяц. А если взять год, выходит 9 250 ₸ в месяц — дешевле одного визита.</p>
         <p>А теперь сделайте одну неприятную вещь: сложите, сколько вы потратили на лицо за последний год. Крем, сыворотка, патчи, пара разовых процедур. По отдельности мелочь — вместе сумма, о которой мы стараемся не думать.</p>
         <p>Я не призываю выбрасывать косметику. Просто посчитайте один раз и сравните.</p>
       </div>
@@ -824,6 +883,7 @@
             <li>Два прямых эфира в неделю — я смотрю, как вы делаете, и поправляю</li>
             <li>Чат, где можно спросить в любой день</li>
             <li>Первая неделя бесплатно, без привязки карты</li>
+            <li>8–9 занятий в месяц: два раза в неделю, среда и суббота</li>
           </ul>
         </div>
 
@@ -843,6 +903,51 @@
       <a class="cta" href="https://t.me/aida_klub_bot?start=lending" target="_blank" rel="noopener"><span>Начать с бесплатной недели</span><span class="cta-arrow">→</span></a>
       <p class="cta-note">Откроется Telegram · Семь дней внутри. Не понравится — просто уйдёте, отменять нечего</p>
     </div>
+  </div>
+</section>
+
+<!-- ================= ОТЗЫВЫ ================= -->
+<section class="grain" style="background: var(--sand);">
+  <div class="wrap stack-lg">
+    <div class="stack rise">
+      <p class="eyebrow">Что говорят женщины</p>
+      <h2>Своими словами</h2>
+      <p class="lede">Это отзывы о работе руками в кабинете в Костанае — клубу всего ничего, своих отзывов у него пока нет. Техники там и здесь одни и те же, разница в том, чьи руки: мои или ваши.</p>
+    </div>
+
+    <div class="quotes">
+      <div class="quote rise">
+        <p>«Вот уже посетив вас в 8-й раз я не только сама, но и окружающие замечают изменения в моём лице в лучшую сторону. Цвет лица стал свежее, черты лица стали чётче, отёки — это моя боль вообще — прошли практически. Просыпаюсь и уже свежее личико, веки однозначно подтянулись.»</p>
+        <p class="quote-who"><b>После 8 процедур</b> · переписка в Telegram</p>
+      </div>
+
+      <div class="quote rise" data-d="1">
+        <p>«Овал лица приобрёл более чёткий контур, кожа стала более упругой и свежей. Морщины на лбу и в районе носогубной складки стали менее заметными. Отдельно хочу сказать, что после массажа шея и плечи стали заметно менее напряжёнными, а головные боли, которые раньше беспокоили довольно часто, теперь случаются гораздо реже.»</p>
+        <p class="quote-who"><b>После 6 сеансов курса</b> · переписка в WhatsApp</p>
+      </div>
+
+      <div class="quote rise">
+        <p>«До массажа лица в моей жизни и после — у меня очень классный результат. Напряжение в бровях и лба ушло, взгляд открытым стал. У меня от того, что лицо похудело, щёки немного повисли — а сейчас подтянулись. Честно, я долго не решалась пойти на массаж лица и очень долго искала мастера.»</p>
+        <p class="quote-who"><b>5 из 10 сеансов абонемента</b> · переписка в WhatsApp</p>
+      </div>
+
+      <div class="quote rise" data-d="1">
+        <p>«Очень рада, что обратилась к вам! Массаж лица это нужная практика. А самое главное, лично для меня, всё мягко без истошной боли. Эффект заметно сразу: лицо подтянулось, приятно стало на себя смотреть.»</p>
+        <p class="quote-who"><b>После первой процедуры</b> · переписка в Telegram</p>
+      </div>
+
+      <div class="quote rise">
+        <p>«Уже пройдя первый пробный, я поняла, что да, надо получить курс. Заметно тонус лица, потянулся овал, щёки, ушли отёки. Как мы ходим в тренажёрный зал, качаем мышцы — так и на лицо необходима такая тренировка.»</p>
+        <p class="quote-who"><b>После пробного занятия</b> · переписка в Telegram</p>
+      </div>
+
+      <div class="quote rise" data-d="1">
+        <p>«Благодарю за приятное, комфортное, естественное омоложение кожи лица. В сравнении с аппаратными вмешательствами очень ценю тактильное выравнивание овала лица. Появилась свежесть, ушли мелкие носогубные морщины вследствие улучшения кровообращения, лимфодренажа. Эффект накопительный и долгосрочный.»</p>
+        <p class="quote-who"><b>Курс 10 процедур, лицо и шейно-воротниковая зона</b> · переписка в Telegram</p>
+      </div>
+    </div>
+
+    <p class="note rise">Имена не подписываю: это личные переписки, и согласия называть женщин по именам я не спрашивала. Орфографию и пунктуацию слегка поправила, слова — нет.</p>
   </div>
 </section>
 
