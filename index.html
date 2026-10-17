@@ -1054,6 +1054,19 @@
     for (var j = 0; j < risers.length; j++) io.observe(risers[j]);
   }
 
+  /* ---------- откуда пришёл человек ----------
+     Бот в инстаграме добавляет к ссылке ?src=ad_12345 — номер объявления.
+     Переносим метку в ссылку на телеграм, чтобы в отчёте было видно,
+     какой ролик довёл человека до клуба. Если метки нет — пишем «site». */
+  try {
+    var src = new URLSearchParams(location.search).get('src') || 'site';
+    src = src.replace(/[^A-Za-z0-9_-]/g, '').slice(0, 60) || 'site';
+    var links = document.querySelectorAll('a[href*="t.me/aida_klub_bot"]');
+    for (var s = 0; s < links.length; s++) {
+      links[s].href = 'https://t.me/aida_klub_bot?start=' + src;
+    }
+  } catch (e) {}
+
   /* ---------- самопроверка ---------- */
   var list = document.getElementById('checklist');
   var box = document.getElementById('verdict');
