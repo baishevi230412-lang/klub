@@ -1067,6 +1067,40 @@
     }
   } catch (e) {}
 
+  /* ---------- счётчик: дошли до страницы и нажали кнопку ----------
+     До 24 ноября между инстаграмом и ботом был слепой участок: сколько
+     людей открыло эту страницу и сколько нажало кнопку — не знал никто. В тот
+     день ссылку получили 24 человека, а до бота дошли трое, и объяснить разрыв
+     было нечем. Теперь страница сообщает боту два события. Ни имён, ни текстов,
+     ничего личного не уходит — только слово «открыли» или «нажали» и метка
+     объявления. Если счётчик не сработает, кнопки работают как обычно:
+     адрес в них настоящий, счёт ничего не перехватывает. */
+  try {
+    var PX = 'https://club-bot.aida-klub.workers.dev/px';
+    var ptag = encodeURIComponent((typeof src === 'string' && src) ? src : 'site');
+    var btns = document.querySelectorAll('a[href*="t.me/aida_klub_bot"]');
+
+    /* Открытие считаем один раз в сутки с устройства: от перезагрузок и
+       возвратов цифра не растёт, иначе она врёт в большую сторону. */
+    var today = new Date().toISOString().slice(0, 10);
+    var mark = null;
+    try { mark = localStorage.getItem('px-seen'); } catch (e1) {}
+    if (mark !== today) {
+      try { localStorage.setItem('px-seen', today); } catch (e2) {}
+      new Image().src = PX + '?e=visit&src=' + ptag + '&r=' + Math.random();
+    }
+
+    /* Нажатие отправляем маячком: обычный запрос браузер обрывает, когда
+       страница уходит в телеграм, а маячок доживает до отправки. */
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].addEventListener('click', function () {
+        var u = PX + '?e=click&src=' + ptag;
+        if (navigator.sendBeacon) navigator.sendBeacon(u);
+        else new Image().src = u + '&r=' + Math.random();
+      });
+    }
+  } catch (e) {}
+
   /* ---------- самопроверка ---------- */
   var list = document.getElementById('checklist');
   var box = document.getElementById('verdict');
